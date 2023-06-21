@@ -42,12 +42,15 @@ void loop()
   //    stepper(-1);
   //  }
   //  delay(1000);
+  updateDoorStatus();
 }
 
 void closeDoor() {
+  updateDoorStatus();
   while (!door_closed) {
-    stepper(-1);
     updateDoorStatus();
+    stepper(-1);
+
 
   }
 
