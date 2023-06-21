@@ -1,4 +1,4 @@
-#include <Adafruit_Fingerprint.h>
+
 #include "LCDIC2.h"
 
 #define IN1   22
@@ -11,11 +11,31 @@ int Steps = 0;
 int Direction = 0;
 const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
-
+const int Open_Time = 5000; //= 2048/4
 LCDIC2 lcd(0x27, 16, 2);
 
-SoftwareSerial mySerial(2, 3); // Configuration du logiciel Serial sur les broches 2 et 3
+///
+#include <Adafruit_Fingerprint.h>
+
+
+#if (defined(__AVR__) || defined(ESP8266)) && !defined(__AVR_ATmega2560__)
+// For UNO and others without hardware serial, we must use software serial...
+// pin #2 is IN from sensor (GREEN wire)
+// pin #3 is OUT from arduino  (WHITE wire)
+// Set up the serial port to use softwareserial..
+SoftwareSerial mySerial(2, 3);
+
+#else
+// On Leonardo/M0/etc, others with hardware serial, use hardware serial!
+// #0 is green wire, #1 is white
+#define mySerial Serial1
+
+#endif
+
+
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
+
+//
 
 void setup()
 {
@@ -27,34 +47,18 @@ void setup()
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
   lcd.begin();  // Initialisation de l'écran LCD
 
-  finger.begin(57600);
-
-  if (finger.verifyPassword())
-  {
-    lcd.clear();
-    lcd.print("Capteur OK !");
-  }
-  else
-  {
-    lcd.clear();
-    lcd.print("capteur KO");
-    while (1)
-    {
-      // Boucle infinie pour arrêter l'exécution du programme
-    }
-  }
-  updateLCD();
+  fingerSetup();
+  updateLCD("HI","Waiting FingerP");
   closeDoor();
-  delay(1000);
-  stepper(number_steps);
-  delay(1000);
-  closeDoor();
+//  delay(1000);
+//
+//  delay(1000);
+//  closeDoor();
   // delay(1000);
 }
 void loop()
 {
-
-  updateDoorStatus();
+  fingerLoop();
 }
 
 void closeDoor() {
@@ -157,13 +161,18 @@ void updateDoorStatus() {
   }
 
 }
-void updateLCD() {
+void updateLCD(String msg1,String msg2) {
 
   // Update the LCD display
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Hello!");
+  lcd.print(msg1);
   lcd.setCursor(0, 1);
-  lcd.print("Welcome");
+  lcd.print(msg2);
 
+}
+
+void openDoor() {
+
+  stepper(number_steps);
 }
