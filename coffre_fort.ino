@@ -25,8 +25,8 @@ void setup()
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
-  lcd.init();  // Initialisation de l'écran LCD
-  lcd.backlight();  // Activation du rétroéclairage
+  lcd.begin();  // Initialisation de l'écran LCD
+
   finger.begin(57600);
 
   if (finger.verifyPassword())
