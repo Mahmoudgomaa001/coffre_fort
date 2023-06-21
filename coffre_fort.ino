@@ -1,3 +1,8 @@
+#include <Adafruit_Fingerprint.h>
+#include "LCDIC2.h"
+
+
+
 #define IN1   22
 #define IN2   24
 #define IN3   26
@@ -9,6 +14,10 @@ int Direction = 0;
 const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 
+LCDIC2 lcd(0x27, 16, 2);
+SoftwareSerial mySerial(2, 3); // Configuration du logiciel Serial sur les broches 2 et 3
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
+
 void setup()
 {
   Serial.begin(9600);
@@ -17,7 +26,25 @@ void setup()
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
+  lcd.init();  // Initialisation de l'écran LCD
+  lcd.backlight();  // Activation du rétroéclairage
+  finger.begin(57600);
 
+  if (finger.verifyPassword())
+  {
+    lcd.clear();
+    lcd.print("Capteur OK !");
+  }
+  else
+  {
+    lcd.clear();
+    lcd.print("capteur KO");
+    while (1)
+    {
+      // Boucle infinie pour arrêter l'exécution du programme
+    }
+  }
+  updateLCD();
   closeDoor();
   delay(1000);
   stepper(number_steps);
@@ -27,21 +54,7 @@ void setup()
 }
 void loop()
 {
-  //  //1 rotation counter clockwise
-  //  stepper(number_steps);
-  //  delay(1000);
-  //  //1 rotation clockwise
-  //  stepper(-number_steps);
-  //  delay(1000);
-  //  //Keep track of step number
-  //  for (int thisStep = 0; thisStep < number_steps; thisStep++) {
-  //    stepper(1);
-  //  }
-  //  delay(1000);
-  //  for (int thisStep = number_steps; thisStep > 0; thisStep--) {
-  //    stepper(-1);
-  //  }
-  //  delay(1000);
+
   updateDoorStatus();
 }
 
@@ -143,5 +156,15 @@ void updateDoorStatus() {
   } else {
     door_closed = false;
   }
+
+}
+void updateLCD() {
+
+  // Update the LCD display
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Hello!");
+  lcd.setCursor(0, 1);
+  lcd.print("Welcome");
 
 }
