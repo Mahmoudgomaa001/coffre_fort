@@ -1,8 +1,6 @@
 #include <Adafruit_Fingerprint.h>
 #include "LCDIC2.h"
 
-
-
 #define IN1   22
 #define IN2   24
 #define IN3   26
@@ -15,6 +13,7 @@ const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 
 LCDIC2 lcd(0x27, 16, 2);
+
 SoftwareSerial mySerial(2, 3); // Configuration du logiciel Serial sur les broches 2 et 3
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
