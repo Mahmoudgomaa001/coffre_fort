@@ -87,7 +87,7 @@ uint8_t getFingerprintID() {
   if (p == FINGERPRINT_OK) {
     updateLCD("Welcome", "FingerP " + String(finger.fingerID));
     delay(1000);
-    updateLCD("Please", "Insret Password" + String(finger.fingerID));
+    updateLCD("Please", "Insert Password" + String(finger.fingerID));
     if (checkPassword()) {
       Serial.println("Found a print match!");
 
