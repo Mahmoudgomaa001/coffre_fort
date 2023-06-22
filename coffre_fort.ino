@@ -52,7 +52,7 @@ void setup()
   //  lcd.begin();  // Initialisation de l'écran LCD
   lcd.init();  // Initialisation de l'écran LCD
   lcd.backlight();  // Activation du rétroéclairage
-  
+    
   updateLCD("HI", "Waiting FingerP");
   fingerSetup();
 
