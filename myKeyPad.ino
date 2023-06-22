@@ -34,8 +34,7 @@ bool checkPassword()
   return enteredPassword.equals(correctPassword);
 }
 
-return enteredPassword.equals(correctPassword);
-}
+
 bool waitForButtonD()
 {
   char key = keypad.getKey();
