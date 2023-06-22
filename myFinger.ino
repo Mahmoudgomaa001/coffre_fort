@@ -85,9 +85,12 @@ uint8_t getFingerprintID() {
   // OK converted!
   p = finger.fingerSearch();
   if (p == FINGERPRINT_OK) {
+    updateLCD("Welcome", "FingerP " + String(finger.fingerID));
+    delay(1000);
+    updateLCD("Please", "Insret Password" + String(finger.fingerID));
     if (checkPassword()) {
       Serial.println("Found a print match!");
-      updateLCD("Welcome", "FingerP " + String(finger.fingerID));
+
       openDoor();
       // Generate a tone of 1000Hz for 1 second
       tone(buzzerPin, 1000);
