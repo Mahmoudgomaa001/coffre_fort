@@ -85,22 +85,19 @@ uint8_t getFingerprintID() {
   // OK converted!
   p = finger.fingerSearch();
   if (p == FINGERPRINT_OK) {
-    if (waitForButtonD())
-    {
-      checkPassword();
+    if (checkPassword()) {
+      Serial.println("Found a print match!");
+      updateLCD("Welcome", "FingerP " + String(finger.fingerID));
+      openDoor();
+      // Generate a tone of 1000Hz for 1 second
+      tone(buzzerPin, 1000);
+      delay(1000);
+      // Stop the tone
+      noTone(buzzerPin);
+      delay(Open_Time);
+      closeDoor();
+      updateLCD("HI", "Waiting FingerP");
     }
-    Serial.println("Found a print match!");
-    updateLCD("Welcome", "FingerP " + String(finger.fingerID));
-    openDoor();
-    // Generate a tone of 1000Hz for 1 second
-    tone(buzzerPin, 1000);
-    delay(1000);
-    // Stop the tone
-    noTone(buzzerPin);
-    delay(Open_Time);
-    closeDoor();
-    updateLCD("HI", "Waiting FingerP");
-
 
 
   } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
@@ -109,6 +106,8 @@ uint8_t getFingerprintID() {
   } else if (p == FINGERPRINT_NOTFOUND) {
     Serial.println("Did not find a match");
     updateLCD("Sorry ", "Not found!");
+    delay(3000);
+    updateLCD("HI", "Waiting FingerP");
     return p;
   } else {
     Serial.println("Unknown error");
