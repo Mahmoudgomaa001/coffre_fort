@@ -24,22 +24,16 @@ bool checkPassword()
   {
     if (key)
     {
-      if (key == 'C')
-      {
-        enteredPassword = ""; // Effacer le code entré
-        lcd.clear();
-        lcd.print("Code efface !");
-      }
-      else
-      {
-        lcd.print(key);
-        enteredPassword += key;
-      }
+      lcd.print(key);
+      enteredPassword += key;
     }
     key = keypad.getKey();
   }
   lcd.println();
   return enteredPassword.equals(correctPassword);
+}
+lcd.println();
+return enteredPassword.equals(correctPassword);
 }
 bool waitForButtonD()
 {
