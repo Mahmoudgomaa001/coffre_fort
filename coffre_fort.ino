@@ -1,10 +1,11 @@
 
 #include "LCDIC2.h"
 
-#define IN1   22
-#define IN2   24
-#define IN3   26
-#define IN4   28
+#define IN1   11
+#define IN2   12
+#define IN3   13
+#define IN4   5
+
 #define DOOR_SWITCH_PIN 30
 
 int Steps = 0;
