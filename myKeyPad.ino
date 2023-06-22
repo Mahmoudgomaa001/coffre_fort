@@ -25,33 +25,12 @@ bool checkPassword()
   {
     if (key)
     {
-      Serial.println(key);
-      lcd.print(key);
+//      Serial.println(key);
+      lcd.print("*");
       enteredPassword += key;
     }
     key = keypad.getKey();
   }
   lcd.println();
   return enteredPassword.equals(correctPassword);
-}
-
-
-bool waitForButtonD()
-{
-  char key = keypad.getKey();
-  while (key != 'D')
-  {
-    if (key == 'B')
-    {
-      lcd.clear();
-      lcd.print("Fermeture !");
-      //      myservo.write(0);   // Ramener le servo-moteur à sa position initiale
-      delay(1000);
-      lcd.print("posez votre doit!");
-      return false;
-
-    }
-    key = keypad.getKey();
-  }
-  return true;
 }
