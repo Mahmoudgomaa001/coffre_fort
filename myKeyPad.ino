@@ -24,6 +24,7 @@ bool checkPassword()
   {
     if (key)
     {
+      Serial.println(key);
       lcd.print(key);
       enteredPassword += key;
     }
@@ -32,7 +33,7 @@ bool checkPassword()
   lcd.println();
   return enteredPassword.equals(correctPassword);
 }
-lcd.println();
+
 return enteredPassword.equals(correctPassword);
 }
 bool waitForButtonD()
