@@ -1,16 +1,20 @@
 #include <Keypad.h>
 const char* correctPassword = "1234";  // Mot de passe correct
-const byte ROWS = 4; // Nombre de lignes du clavier
-const byte COLS = 4; // Nombre de colonnes du clavier
-char keys[ROWS][COLS] = {
-  {'1', '2', '3', 'A'},
-  {'4', '5', '6', 'B'},
-  {'7', '8', '9', 'C'},
-  {'*', '0', '#', 'D'}
+const byte ROWS = 4;
+const byte COLS = 10;
+
+char hexaKeys[ROWS][COLS] = {
+  {'1', '2', '3'},
+  {'4', '5', '6'},
+  {'7', '8', '9'},
+  {'*', '0', '#'}
 };
-byte rowPins[ROWS] = {9, 8, 7, 6};    // Broches des lignes connectées au clavier
-byte colPins[COLS] = {5, 4, A0, A1};   // Broches des colonnes connectées au clavier
-Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+byte rowPins[ROWS] = {A1, 8, 7, 6};
+byte colPins[COLS] = {A0, 4, 10};
+
+Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
+
 bool checkPassword()
 {
   String enteredPassword;
@@ -46,11 +50,11 @@ bool waitForButtonD()
     {
       lcd.clear();
       lcd.print("Fermeture !");
-//      myservo.write(0);   // Ramener le servo-moteur à sa position initiale
+      //      myservo.write(0);   // Ramener le servo-moteur à sa position initiale
       delay(1000);
       lcd.print("posez votre doit!");
       return false;
-      
+
     }
     key = keypad.getKey();
   }
