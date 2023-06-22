@@ -17,7 +17,7 @@ const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 const int Open_Time = 5000; //= 2048/4
 
-boolean access = false;
+
 
 ///
 #include <Adafruit_Fingerprint.h>
@@ -49,11 +49,12 @@ void setup()
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  pinMode(buzzerPin, OUTPUT); // Set buzzer - pin 9 as an output
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
   //  lcd.begin();  // Initialisation de l'écran LCD
   lcd.init();  // Initialisation de l'écran LCD
   lcd.backlight();  // Activation du rétroéclairage
-    
+
   updateLCD("HI", "Waiting FingerP");
   fingerSetup();
 
