@@ -1,5 +1,8 @@
-
 #include "LCDIC2.h"
+//LCDIC2 lcd(0x27, 16, 2);
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);  // Adresse I2C de l'écran LCD et dimensions (20x4)
+
 
 #define IN1   11
 #define IN2   12
@@ -13,7 +16,7 @@ int Direction = 0;
 const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 const int Open_Time = 5000; //= 2048/4
-LCDIC2 lcd(0x27, 16, 2);
+
 
 ///
 #include <Adafruit_Fingerprint.h>
@@ -46,15 +49,18 @@ void setup()
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
-  lcd.begin();  // Initialisation de l'écran LCD
-
+  //  lcd.begin();  // Initialisation de l'écran LCD
+  lcd.init();  // Initialisation de l'écran LCD
+  lcd.backlight();  // Activation du rétroéclairage
+  
+  updateLCD("HI", "Waiting FingerP");
   fingerSetup();
-  updateLCD("HI","Waiting FingerP");
+
   closeDoor();
-//  delay(1000);
-//
-//  delay(1000);
-//  closeDoor();
+  //  delay(1000);
+  //
+  //  delay(1000);
+  //  closeDoor();
   // delay(1000);
 }
 void loop()
@@ -162,7 +168,7 @@ void updateDoorStatus() {
   }
 
 }
-void updateLCD(String msg1,String msg2) {
+void updateLCD(String msg1, String msg2) {
 
   // Update the LCD display
   lcd.clear();

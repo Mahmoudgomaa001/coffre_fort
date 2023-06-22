@@ -2,22 +2,22 @@
 
 void fingerSetup()
 {
-//  //  Serial.begin(9600);
-//  while (!Serial);  // For Yun/Leo/Micro/Zero/...
-//  delay(100);
-//  Serial.println("\n\nAdafruit finger detect test");
+  //  //  Serial.begin(9600);
+  //  while (!Serial);  // For Yun/Leo/Micro/Zero/...
+  //  delay(100);
+  //  Serial.println("\n\nAdafruit finger detect test");
 
   // set the data rate for the sensor serial port
   finger.begin(57600);
-  delay(5);
-  if (finger.verifyPassword()) {
-    Serial.println("Found fingerprint sensor!");
-  } else {
-    Serial.println("Did not find fingerprint sensor :(");
-    while (1) {
-      delay(1);
-    }
-  }
+//  delay(5);
+//  if (finger.verifyPassword()) {
+//    Serial.println("Found fingerprint sensor!");
+//  } else {
+//    Serial.println("Did not find fingerprint sensor :(");
+//    while (1) {
+//      delay(1);
+//    }
+//  }
 
 
 
@@ -45,16 +45,16 @@ uint8_t getFingerprintID() {
       Serial.println("Image taken");
       break;
     case FINGERPRINT_NOFINGER:
-      Serial.println("No finger detected");
+//      Serial.println("No finger detected");
       return p;
     case FINGERPRINT_PACKETRECIEVEERR:
-      Serial.println("Communication error");
+//      Serial.println("Communication error");
       return p;
     case FINGERPRINT_IMAGEFAIL:
-      Serial.println("Imaging error");
+//      Serial.println("Imaging error");
       return p;
     default:
-      Serial.println("Unknown error");
+//      Serial.println("Unknown error");
       return p;
   }
 
@@ -96,6 +96,10 @@ uint8_t getFingerprintID() {
     Serial.println("Unknown error");
     return p;
   }
+  updateLCD("Welcome", "FingerP " + String(finger.fingerID));
+  openDoor();
+  delay(Open_Time);
+  closeDoor();
 
   // found a match!
   Serial.print("Found ID #"); Serial.print(finger.fingerID);
@@ -115,10 +119,6 @@ int getFingerprintIDez() {
   p = finger.fingerFastSearch();
   if (p != FINGERPRINT_OK)  return -1;
 
-  updateLCD("Welcome", "FingerP " + String(finger.fingerID));
-  openDoor();
-  delay(Open_Time);
-  closeDoor();
 
   // found a match!
   Serial.print("Found ID #"); Serial.print(finger.fingerID);
