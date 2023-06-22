@@ -17,6 +17,7 @@ const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 const int Open_Time = 5000; //= 2048/4
 
+boolean access = false;
 
 ///
 #include <Adafruit_Fingerprint.h>

@@ -85,12 +85,23 @@ uint8_t getFingerprintID() {
   // OK converted!
   p = finger.fingerSearch();
   if (p == FINGERPRINT_OK) {
+    if (waitForButtonD())
+    {
+      checkPassword();
+    }
     Serial.println("Found a print match!");
     updateLCD("Welcome", "FingerP " + String(finger.fingerID));
     openDoor();
+    // Generate a tone of 1000Hz for 1 second
+    tone(buzzerPin, 1000);
+    delay(1000);
+    // Stop the tone
+    noTone(buzzerPin);
     delay(Open_Time);
     closeDoor();
-    tone(buzzerPin, 1000, 1000); // Activer le buzzer avec une fréquence de 1000 Hz pendant 1 seconde
+    updateLCD("HI", "Waiting FingerP");
+
+
 
   } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
     Serial.println("Communication error");
