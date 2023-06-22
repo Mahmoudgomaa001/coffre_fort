@@ -19,7 +19,8 @@ bool checkPassword()
 {
   String enteredPassword;
   char key = keypad.getKey();
-
+  lcd.clear();
+  lcd.print("code:");
   while (key != '#')
   {
     if (key)
