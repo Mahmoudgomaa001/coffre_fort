@@ -2,10 +2,10 @@
 
 void fingerSetup()
 {
-  //  Serial.begin(9600);
-  while (!Serial);  // For Yun/Leo/Micro/Zero/...
-  delay(100);
-  Serial.println("\n\nAdafruit finger detect test");
+//  //  Serial.begin(9600);
+//  while (!Serial);  // For Yun/Leo/Micro/Zero/...
+//  delay(100);
+//  Serial.println("\n\nAdafruit finger detect test");
 
   // set the data rate for the sensor serial port
   finger.begin(57600);
