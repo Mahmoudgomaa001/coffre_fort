@@ -6,7 +6,7 @@
 #define IN3   13
 #define IN4   5
 
-#define DOOR_SWITCH_PIN 30
+#define DOOR_SWITCH_PIN A2
 
 int Steps = 0;
 int Direction = 0;
