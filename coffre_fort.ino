@@ -20,7 +20,7 @@ const int Open_Time = 5000; //= 2048/4
 
 ///
 #include <Adafruit_Fingerprint.h>
-
+const int buzzerPin = 1; // Broche du buzzer
 
 #if (defined(__AVR__) || defined(ESP8266)) && !defined(__AVR_ATmega2560__)
 // For UNO and others without hardware serial, we must use software serial...
