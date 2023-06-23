@@ -39,16 +39,10 @@ void vipHandler() {
   if (!(!digitalRead(vip_pin) && door_closed))
     return;
   char key = keypad.getKey();
-  lcd.clear();
+
   tone(buzzerPin, 2000, 1000); //generate sound signal
   while (key != '*')
   {
-    if (key)
-    {
-      //      Serial.println(key);
-      lcd.print("*");
-   
-    }
-    key = keypad.getKey();
+
   }
 }
