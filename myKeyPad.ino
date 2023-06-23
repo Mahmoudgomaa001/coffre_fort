@@ -38,7 +38,7 @@ bool checkPassword()
 
 void vipHandler() {
   if ((!digitalRead(vip_pin) && door_closed)) {
-    tri = true;
+
     tone(buzzerPin, 2000, 5000); //generate sound
   }
 
