@@ -25,7 +25,7 @@ bool checkPassword()
   {
     if (key)
     {
-//      Serial.println(key);
+      //      Serial.println(key);
       lcd.print("*");
       enteredPassword += key;
     }
@@ -33,4 +33,22 @@ bool checkPassword()
   }
   lcd.println();
   return enteredPassword.equals(correctPassword);
+}
+
+void vipHandler() {
+  if (!(!digitalRead(vip_pin) && door_closed))
+    return;
+  char key = keypad.getKey();
+  lcd.clear();
+  tone(buzzerPin, 2000, 1000); //generate sound signal
+  while (key != '*')
+  {
+    if (key)
+    {
+      //      Serial.println(key);
+      lcd.print("*");
+      enteredPassword += key;
+    }
+    key = keypad.getKey();
+  }
 }
