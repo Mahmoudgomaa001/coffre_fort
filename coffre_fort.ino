@@ -51,6 +51,8 @@ void setup()
   pinMode(IN4, OUTPUT);
   pinMode(buzzerPin, OUTPUT); // Set buzzer - pin 9 as an output
   pinMode(DOOR_SWITCH_PIN, INPUT_PULLUP);
+  pinMode(vip_pin, INPUT_PULLUP);
+ 
   //  lcd.begin();  // Initialisation de l'écran LCD
   lcd.init();  // Initialisation de l'écran LCD
   lcd.backlight();  // Activation du rétroéclairage
