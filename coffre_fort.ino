@@ -188,6 +188,6 @@ void openDoor() {
 }
 
 void vipHandler() {
-  if (digitalRead(vip_pin) && door_closed)
+  if (!digitalRead(vip_pin) && door_closed)
     tone(buzzerPin, 2000, 1000); //generate sound signal
 }
