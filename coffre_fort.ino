@@ -17,7 +17,7 @@ const int number_steps = 2048; //= 2048/4
 boolean door_closed = false;
 const int Open_Time = 5000; //= 2048/4
 
-
+int vib_pin = A3;
 
 ///
 #include <Adafruit_Fingerprint.h>
@@ -68,6 +68,7 @@ void setup()
 void loop()
 {
   fingerLoop();
+  vipHandler();
 }
 
 void closeDoor() {
@@ -184,4 +185,9 @@ void updateLCD(String msg1, String msg2) {
 void openDoor() {
 
   stepper(number_steps);
+}
+
+void vipHandler() {
+  if (digitalRead(vip_pin) && door_closed)
+    tone(buzzerPin, 2000, 1000); //generate sound signal
 }
