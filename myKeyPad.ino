@@ -35,14 +35,22 @@ bool checkPassword()
   return enteredPassword.equals(correctPassword);
 }
 
+tri = false;
 void vipHandler() {
-  if ((!digitalRead(vip_pin) && door_closed))
+  if ((!digitalRead(vip_pin) && door_closed)) {
+    tri = true;
+    tone(buzzerPin, 2000, 1000); //generate sound
+  }
+  if (tri) {
     char key = keypad.getKey();
-
-  tone(buzzerPin, 2000, 1000); //generate sound signal
-  while (key != '*')
-  {
+    tone(buzzerPin, 2000, 1000); //generate sound signal
+    while (key != '*')
+    {
+      tri = false;
+    }
 
   }
+
+
 
 }
