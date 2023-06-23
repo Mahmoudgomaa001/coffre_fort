@@ -35,7 +35,7 @@ bool checkPassword()
   return enteredPassword.equals(correctPassword);
 }
 
-tri = false;
+bool tri = false;
 void vipHandler() {
   if ((!digitalRead(vip_pin) && door_closed)) {
     tri = true;
