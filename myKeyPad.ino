@@ -37,11 +37,12 @@ bool checkPassword()
 
 void vipHandler() {
   if ((!digitalRead(vip_pin) && door_closed))
-  char key = keypad.getKey();
+    char key = keypad.getKey();
 
   tone(buzzerPin, 2000, 1000); //generate sound signal
   while (key != '*')
   {
 
   }
+
 }
