@@ -47,7 +47,7 @@ void vipHandler() {
     {
       //      Serial.println(key);
       lcd.print("*");
-      enteredPassword += key;
+   
     }
     key = keypad.getKey();
   }
